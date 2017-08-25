@@ -1,23 +1,23 @@
 var test = require('tape')
 var fdstore = require('fd-chunk-store')
 var hyperkdb = require('../')
-var kdbtree = require('grid-point-store')
+var GeoStore = require('grid-point-store')
 var memdb = require('memdb')
 var path = require('path')
 
 var hyperlog = require('hyperlog')
-var log = hyperlog(memdb(), { valueEncoding: 'json' })
-var file = path.join(require('os').tmpdir(), 'kdb-tree-' + Math.random())
 
 test('points', function (t) {
   var N = 50
   t.plan(2 + N)
+
+  var log = hyperlog(memdb(), { valueEncoding: 'json' })
   var kdb = hyperkdb({
     log: log,
     db: memdb(),
     pointType: 'float',
     types: [ 'float', 'float' ],
-    store: kdbtree,
+    store: GeoStore,
     storeDb: memdb(),
     map: function (row, next) {
       if (row.value.type === 'point') {

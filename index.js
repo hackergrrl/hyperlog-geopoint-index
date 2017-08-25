@@ -102,11 +102,6 @@ HGEO.prototype.ready = function (fn) {
 }
 
 HGEO.prototype.query = function (q, opts, cb) {
-  q = [
-    [ q[0][0], q[1][0] ],
-    [ q[0][1], q[1][1] ]
-  ]
-
   var self = this
   self.ready(function () {
     self.geostore.query(q, opts, cb)
@@ -114,11 +109,6 @@ HGEO.prototype.query = function (q, opts, cb) {
 }
 
 HGEO.prototype.queryStream = function (q, opts) {
-  q = [
-    [ q[0][0], q[1][0] ],
-    [ q[0][1], q[1][1] ]
-  ]
-
   var self = this
   var r = through.obj()
   self.ready(function () {
