@@ -59,12 +59,10 @@ function HGEO (opts) {
             return
           }
           if (rec.point) {
-            console.log('aw chicken fingers 1')
             self.geostore.remove(rec.point, { value: Buffer(link, 'hex') }, onrm)
           } else if (rec.points) {
             pending += rec.points.length
             rec.points.forEach(function (pt) {
-              console.log('aw chicken fingers 2')
               self.geostore.remove(pt, { value: Buffer(link, 'hex') }, onrm)
             })
             if (--pending === 0) insert()

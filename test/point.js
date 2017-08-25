@@ -3,8 +3,6 @@ var fdstore = require('fd-chunk-store')
 var hyperkdb = require('../')
 var GeoStore = require('grid-point-store')
 var memdb = require('memdb')
-var path = require('path')
-
 var hyperlog = require('hyperlog')
 
 test('points', function (t) {
