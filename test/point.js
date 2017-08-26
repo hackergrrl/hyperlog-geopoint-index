@@ -33,24 +33,20 @@ test('points', function (t) {
     log.add(null, row, function (err, node) {
       t.ifError(err)
       data[i] = {
-        point: [ row.lat, row.lon ],
+        lat: row.lat,
+        lon: row.lon,
         value: Buffer(node.key, 'hex')
       }
     })
   })(i)
 
-  var q = [[64.5,65],[-147.9,-147.2]]
+  var q = [[64.5,-147.9], [65,-147.2]]
   kdb.query(q, function (err, pts) {
     t.ifError(err)
-    pts = pts.map(function (pt) {
-      pt.point = [pt.lat, pt.lon]
-      delete pt.lat
-      delete pt.lon
-      return pt
-    }).sort(cmp)
+    pts = pts.sort(cmp)
     var expected = data.filter(function (row) {
-      return q[0][0] <= row.point[0] && row.point[0] <= q[0][1]
-        && q[1][0] <= row.point[1] && row.point[1] <= q[1][1]
+      return q[0][0] <= row.lat && row.lat <= q[1][0]
+        && q[0][1] <= row.lon && row.lon <= q[1][1]
     }).map(round).sort(cmp)
     t.deepEqual(pts.sort(cmp), expected, 'expected points')
   })
@@ -58,7 +54,8 @@ test('points', function (t) {
 
 function round (row) {
   return {
-    point: row.point.map(roundf),
+    lat: roundf(row.lat),
+    lon: roundf(row.lon),
     value: row.value
   }
 }
@@ -70,5 +67,5 @@ function roundf (x) {
 }
 
 function cmp (a, b) {
-  return a.point.join(',') < b.point.join(',') ? -1 : 1
+  return a.lat < b.lat ? -1 : 1
 }
