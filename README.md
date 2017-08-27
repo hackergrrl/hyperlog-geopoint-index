@@ -3,7 +3,7 @@
 > Manage a geo-point store using data from a
 > [hyperlog](https://github.com/mafintosh/hyperlog).
 
-# Example
+## Example
 
 ``` js
 var hypergeo = require('hyperlog-geopoint-index')
@@ -51,13 +51,13 @@ $ node log.js query 60,65 -149,-146
 [ 61.599998474121094, -148.3000030517578 ]
 ```
 
-# api
+## API
 
 ``` js
 var hypergeo = require('hyperlog-geopoint-index')
 ```
 
-## var geo = hypergeo(opts)
+### var geo = hypergeo(opts)
 
 Create a spatial index of points over a hyperlog. These options are required:
 
@@ -81,22 +81,22 @@ If `rec` is an array, it will be interpreted as a point in a `'put'`.
 
 [1]: https://npmjs.com/package/comparable-storable-types
 
-## geo.query(q, opts={}, cb)
+### geo.query(q, opts={}, cb)
 
 Query for all points in the region described by `q`. This method is passed
 through to the underlying geopoint store's query method.
 
-## var r = geo.queryStream(q, opts={})
+### var r = geo.queryStream(q, opts={})
 
 Return a readable stream `r` with the region described by `q`. This method is
 passed through to the underlying geopoint store's query method.
 
-## geo.ready(fn)
+### geo.ready(fn)
 
 When the index has caught up with the latest known entry in the hyperlog, `fn()`
 fires.
 
-## log.add(links, doc, cb)
+### log.add(links, doc, cb)
 
 When you write to the hyperlog, the `links` should refer to the ancestors of the
 current `doc` which will be replaced with the new value.
@@ -107,12 +107,18 @@ When you update an existing point, `links` should contain a list of immediate
 ancestors that the update will replace. Usually this will be a single key, but
 for merge cases, this can be several keys.
 
-# install
+## Install
 
 ```
 npm install hyperlog-geopoint-index
 ```
 
-# license
+## Acknowledgments
+
+This code forked from
+[substack](http://gitmx.com/%409nTgtYmvW4HID6ayt6Icwc8WZxdifx5SlSKKIX%2FX%2F1g%3D.ed25519)'s
+[hyperlog-kdb-index](https://github.com/substack/hyperlog-kdb-index).
+
+## License
 
 ISC
