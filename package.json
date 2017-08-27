@@ -1,6 +1,6 @@
 {
   "name": "hyperlog-geopoint-index",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Manage a geo-point store using data from a hyperlog.",
   "main": "index.js",
   "scripts": {
